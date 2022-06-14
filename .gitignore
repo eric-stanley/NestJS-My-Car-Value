@@ -1,4 +1,5 @@
 /env
+/db
 
 # compiled output
 /dist
