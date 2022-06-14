@@ -22,7 +22,7 @@ const cookieSession = require('cookie-session');
         return {
           type: 'sqlite',
           database: config.get<string>('DB_NAME'),
-          synchronize: true,
+          synchronize: config.get<string>('SYNCHRONIZE') ? true : false,
           entities: [User, Report],
         };
       },
