@@ -12,6 +12,7 @@ switch (process.env.NODE_ENV) {
       type: 'sqlite',
       database: 'db/db.dev.sqlite',
       entities: ['**/entities/*.entity.js'],
+      synchronize: true,
     });
     break;
   case 'test':

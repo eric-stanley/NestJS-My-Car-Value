@@ -5,19 +5,19 @@ Content-Type: application/json
 {
     "make": "ford",
     "model": "mustang",
-    "year": 2006,
-    "mileage": 50000,
+    "year": 2005,
+    "mileage": 5000,
     "lat": 45,
     "lng": 45,
     "price": 18000
 }
 
 ### Approve existing report
-PATCH http://localhost:3000/reports/9
+PATCH http://localhost:3000/reports/5
 Content-Type: application/json
 
 {
-    "approved": false
+    "approved": true
 }
 
 

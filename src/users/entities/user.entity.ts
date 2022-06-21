@@ -7,6 +7,8 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -30,6 +32,12 @@ export class User {
   logInsert() {
     console.log('Insered user with id: ', this.id);
   }
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 
   @AfterUpdate()
   logUpdate() {

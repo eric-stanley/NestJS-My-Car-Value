@@ -7,6 +7,8 @@ import {
   AfterInsert,
   AfterRemove,
   AfterUpdate,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -40,6 +42,12 @@ export class Report {
 
   @ManyToOne(() => User, (user) => user.reports)
   user: User;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 
   @AfterInsert()
   logInsert() {
