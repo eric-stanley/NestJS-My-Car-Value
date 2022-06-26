@@ -15,6 +15,10 @@ class ConfigService {
     this.envConfig = this.validateInput(config);
   }
 
+  public getCookieKey(): string {
+    return this.envConfig.COOKIE_KEY;
+  }
+
   public getTypeORMConfig(): TypeOrmModuleOptions {
     const baseDir = path.join(__dirname, '../');
     const entitiesPath = `${baseDir}${this.envConfig.TYPEORM_ENTITIES}`;
