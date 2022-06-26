@@ -52,6 +52,8 @@ class ConfigService {
       };
     }
 
+    console.log(options);
+
     return options;
   }
 
