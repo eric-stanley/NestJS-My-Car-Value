@@ -25,7 +25,7 @@ class ConfigService {
     const migrationPath = `${baseDir}${this.envConfig.TYPEORM_MIGRATIONS}`;
 
     const type: any = this.envConfig.TYPEORM_CONNECTION;
-    return {
+    let options = {
       type,
       host: this.envConfig.TYPEORM_HOST,
       username: this.envConfig.TYPEORM_USERNAME,
@@ -41,7 +41,18 @@ class ConfigService {
         migrationsDir: 'src/db/migrations',
         entitiesDir: 'src/**/entities',
       },
-    };
+    } as any;
+
+    if (
+      process.env.NODE_ENV === 'production' &&
+      this.envConfig.TYPEORM_HOST !== 'localhost'
+    ) {
+      options.ssl = {
+        rejectUnauthorized: false,
+      };
+    }
+
+    return options;
   }
 
   /*
