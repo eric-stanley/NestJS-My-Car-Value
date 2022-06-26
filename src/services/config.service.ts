@@ -49,7 +49,6 @@ class ConfigService {
       NODE_ENV: Joi.string()
         .valid('development', 'test', 'stage', 'production')
         .default('development'),
-      HTTP_PORT: Joi.number().required(),
     }).unknown(true);
 
     const { error, value: validatedEnvConfig } =

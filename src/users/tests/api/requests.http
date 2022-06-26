@@ -3,16 +3,16 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "test02@example.com",
+    "email": "test08@example.com",
     "password": "test123"
 }
 
 ### Signin existing user
-POST http://localhost:3000/auth/signin
+POST https://nestjs-mycar-value.herokuapp.com/auth/signin
 Content-Type: application/json
 
 {
-    "email": "test04@example.com",
+    "email": "test06@example.com",
     "password": "test123"
 }
 
