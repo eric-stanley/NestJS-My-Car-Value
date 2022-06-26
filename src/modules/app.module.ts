@@ -1,18 +1,21 @@
 import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UsersModule } from './users/modules/users.module';
-import { ReportsModule } from './reports/modules/reports.module';
+import ConfigModule from './config.module';
+import { UsersModule } from '../users/modules/users.module';
+import { ReportsModule } from '../reports/modules/reports.module';
+import ConfigService from '../services/config.service';
 const cookieSession = require('cookie-session');
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: `env/.env.${process.env.NODE_ENV}`,
+    ConfigModule,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        return config.getTypeORMConfig();
+      },
     }),
-    TypeOrmModule.forRoot(),
     UsersModule,
     ReportsModule,
   ],
@@ -27,11 +30,12 @@ const cookieSession = require('cookie-session');
 })
 export class AppModule {
   constructor(private configService: ConfigService) {}
+
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(
         cookieSession({
-          keys: [this.configService.get('COOKIE_KEY')],
+          keys: [this.configService.envConfig.COOKIE_KEY],
         }),
       )
       .forRoutes('*');

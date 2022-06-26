@@ -40,7 +40,7 @@ export class Report {
   @Column({ default: false })
   approved: boolean;
 
-  @ManyToOne(() => User, (user) => user.reports)
+  @ManyToOne(() => User, (user) => user.reports, { onDelete: 'CASCADE' })
   user: User;
 
   @CreateDateColumn({ name: 'created_at' })

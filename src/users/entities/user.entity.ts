@@ -25,7 +25,7 @@ export class User {
   @Column({ default: true })
   admin: boolean;
 
-  @OneToMany(() => Report, (report) => report.user)
+  @OneToMany(() => Report, (report) => report.user, { onDelete: 'CASCADE' })
   reports: Report[];
 
   @AfterInsert()
