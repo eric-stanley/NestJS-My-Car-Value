@@ -29,9 +29,7 @@ class ConfigService {
     }`;
 
     let options = {
-      type:
-        this.envConfig.TYPEORM_CONNECTION ||
-        (process.env.TYPEORM_CONNECTION as any),
+      type: this.envConfig.TYPEORM_CONNECTION || process.env.TYPEORM_CONNECTION,
       host: this.envConfig.TYPEORM_HOST || process.env.TYPEORM_HOST,
       username: this.envConfig.TYPEORM_USERNAME || process.env.TYPEORM_USERNAME,
       password: this.envConfig.TYPEORM_PASSWORD || process.env.TYPEORM_PASSWORD,
@@ -40,19 +38,18 @@ class ConfigService {
         this.envConfig.TYPEORM_PORT || process.env.TYPEORM_PORT,
         10,
       ),
-      logger:
-        this.envConfig.TYPEORM_LOGGER || (process.env.TYPEORM_LOGGER as any),
+      logger: this.envConfig.TYPEORM_LOGGER || process.env.TYPEORM_LOGGER,
       logging:
-        this.envConfig.TYPEORM_LOGGING ||
-        process.env.TYPEORM_LOGGING === 'true',
+        (this.envConfig.TYPEORM_LOGGING || process.env.TYPEORM_LOGGING) ===
+        'true',
       entities: [entitiesPath],
       migrations: [migrationPath],
       migrationsRun:
-        this.envConfig.TYPEORM_MIGRATIONS_RUN ||
-        process.env.TYPEORM_MIGRATIONS_RUN === 'true',
+        (this.envConfig.TYPEORM_MIGRATIONS_RUN ||
+          process.env.TYPEORM_MIGRATIONS_RUN) === 'true',
       cli: {
-        migrationsDir: 'src/db/migrations',
-        entitiesDir: 'src/**/entities',
+        migrationsDir: `src/db/migrations/${process.env.TYPEORM_CONNECTION}`,
+        entitiesDir: `src/**/entities`,
       },
     } as any;
 
@@ -64,8 +61,6 @@ class ConfigService {
         rejectUnauthorized: false,
       };
     }
-
-    console.log(options);
 
     return options;
   }

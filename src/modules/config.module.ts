@@ -7,7 +7,9 @@ import ConfigService from '../services/config.service';
     {
       provide: ConfigService,
       useValue: new ConfigService(
-        `env/.${process.env.NODE_ENV || 'development'}.env`,
+        `env/${process.env.TYPEORM_CONNECTION}/.${
+          process.env.NODE_ENV || 'development'
+        }.env`,
       ),
     },
   ],

@@ -11,11 +11,13 @@ export default {
   password: process.env.TYPEORM_PASSWORD,
   database: process.env.TYPEORM_DATABASE,
   port: Number.parseInt(process.env.TYPEORM_PORT, 10),
+  logger: process.env.TYPEORM_LOGGER,
+  logging: process.env.TYPEORM_LOGGING === 'true',
   entities: [entitiesPath],
   migrations: [migrationPath],
   migrationsRun: process.env.TYPEORM_MIGRATIONS_RUN === 'true',
   cli: {
-    migrationsDir: 'src/db/migrations',
-    entitiesDir: 'src/**/entities',
+    migrationsDir: `src/db/migrations/${process.env.TYPEORM_CONNECTION}`,
+    entitiesDir: `src/**/entities`,
   },
 };
